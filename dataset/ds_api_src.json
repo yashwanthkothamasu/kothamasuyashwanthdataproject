@@ -1,0 +1,36 @@
+{
+	"name": "ds_api_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "DimAirport.json",
+				"fileSystem": "api"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"airport_id": {
+					"type": "integer"
+				},
+				"airport_name": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				},
+				"country": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

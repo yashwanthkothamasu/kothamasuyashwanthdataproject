@@ -1,0 +1,15 @@
+{
+	"name": "kothamasuyashwanthdataproject",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "30d9a6ae-1f78-4808-b823-4795ed1d1c40",
+		"tenantId": "6feea78f-e687-4578-930b-3d44b950ee56"
+	}
+}

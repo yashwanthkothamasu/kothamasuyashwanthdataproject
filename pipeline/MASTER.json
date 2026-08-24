@@ -1,0 +1,116 @@
+{
+	"name": "MASTER",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_onpremise_migrate",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Files": {
+							"value": "@pipeline().parameters.Files",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline 2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_api_migration",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Execute Pipeline3",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline 2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_SQLServer_migration",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-10.northcentralus.logic.azure.com:443/workflows/57032a6320144b58b968df32a055eef6/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=X77ncXqeQdy8zDp5bHKf5P1G9_5-Qy3-AHZ6_akfHqs",
+					"body": {
+						"value": "{\n    \"pipelinename\" :\"@{pipeline().Pipeline}\",\n    \"runid\" : \"@{pipeline().RunId}\",\n    \"status\" : \"@{activity('Execute Pipeline3').Status}\",\n    \"error_message\" : \"@{if(equals(activity('Execute Pipeline3').Status,'Failed'),string(activity('Execute Pipeline3').error),'No Error')}\"\n}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Files": {
+				"type": "array",
+				"defaultValue": [
+					"DimAirline.csv",
+					"DimFlight.csv",
+					"DimPassenger.csv"
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-08-21T11:48:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
