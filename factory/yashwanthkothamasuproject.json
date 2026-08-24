@@ -1,0 +1,15 @@
+{
+	"name": "yashwanthkothamasuproject",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "378ec58c-28ff-406c-8ce6-6bbbfa35846f",
+		"tenantId": "6feea78f-e687-4578-930b-3d44b950ee56"
+	}
+}
