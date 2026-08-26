@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "yashwanthkothamasuproject"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"ls_data_lake_new_accountKey": {
+			"value": ""
+		},
+		"ls_datalake_accountKey": {
+			"value": ""
+		},
+		"ls_loaddata_json_accountKey": {
+			"value": ""
+		},
+		"ls_onprem_file_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adfyashwanthstorage.dfs.core.windows.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "adfprojectyash.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "adfprojectdb"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "adminadmin"
+		},
+		"ls_data_lake_new_properties_typeProperties_url": {
+			"value": "https://adfyashwanthstorage.dfs.core.windows.net/"
+		},
+		"ls_datalake_properties_typeProperties_url": {
+			"value": "https://adfyashwanthstorage.dfs.core.windows.net/"
+		},
+		"ls_git_connector_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/"
+		},
+		"ls_loaddata_json_properties_typeProperties_url": {
+			"value": "https://adfyashwanthstorage.dfs.core.windows.net/"
+		},
+		"ls_onprem_file_properties_typeProperties_host": {
+			"value": "C:\\KYFiles"
+		},
+		"ls_onprem_file_properties_typeProperties_userId": {
+			"value": "desktop-8etgu76\\ADFUser"
+		}
+	}
+}
